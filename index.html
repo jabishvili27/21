@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>21</title>
+    <style>
+      body {
+        background-color: rgb(0, 77, 128);
+      }
+      header {
+        height: 150px;
+        background-color: rgb(55, 115, 243);
+        border-radius: 30px;
+        text-align: center;
+      }
+
+      footer {
+        height: 100px;
+        background-color: rgb(55, 115, 243);
+        border-radius: 30px;
+        text-align: center;
+      }
+      nav {
+        height: 20px;
+      }
+      img {
+        width: 100px;
+        border-radius: 10px;
+      }
+      #btnHide {
+        visibility: hidden;
+      }
+      #PC,
+      #ME {
+        font-size: 30px;
+        font-weight: bold;
+      }
+      .card {
+        cursor: pointer;
+      }
+      .cards:hover {
+        width: 140px;
+      }
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>21</h1>
+    </header>
+
+    <nav></nav>
+
+    <section>
+      <article>
+        <div class="content">
+          <div>
+            <img src="deck/blank.gif" />
+            <img src="deck/blank.gif" />
+            <img src="deck/blank.gif" /><br />
+          </div>
+          <div>
+            <p id="PC"></p>
+          </div>
+          <div class="card">
+            <img class="cards" src="deck/blank.gif" onclick="kartiME(3);" />
+            <img class="cards" src="deck/blank.gif" onclick="kartiME(4);" />
+            <img
+              class="cards"
+              src="deck/blank.gif"
+              onclick="kartiME(5);"
+            /><br />
+          </div>
+
+          <p id="ME"></p>
+          <h2 id="result_finish"></h2>
+          <br />
+          <h1 id="result"></h1>
+          <br /><button id="btnHide" onclick="location.reload();">
+            new game
+          </button>
+          <br /><br />
+        </div>
+
+        <script>
+          let kartebi = [
+            "6a.gif",
+            "6g.gif",
+            "6j.gif",
+            "6k.gif",
+            "7a.gif",
+            "7g.gif",
+            "7j.gif",
+            "7k.gif",
+            "8a.gif",
+            "8g.gif",
+            "8j.gif",
+            "8k.gif",
+            "9a.gif",
+            "9g.gif",
+            "9j.gif",
+            "9k.gif",
+            "10a.gif",
+            "10g.gif",
+            "10j.gif",
+            "10k.gif",
+            "va.gif",
+            "vg.gif",
+            "vj.gif",
+            "vk.gif",
+            "da.gif",
+            "dg.gif",
+            "dj.gif",
+            "dk.gif",
+            "ka.gif",
+            "kg.gif",
+            "kj.gif",
+            "kk.gif",
+            "ta.gif",
+            "tg.gif",
+            "tj.gif",
+            "tk.gif",
+          ];
+
+          let scorePC = 0;
+          let scoreME = 0;
+
+          let pc_karti1 = Math.floor(Math.random() * kartebi.length);
+          document.images[0].src = "deck/" + kartebi[pc_karti1];
+          scorePC = scorePC + qula(pc_karti1);
+          let pc_karti2 = Math.floor(Math.random() * kartebi.length);
+          document.images[1].src = "deck/" + kartebi[pc_karti2];
+          scorePC = scorePC + qula(pc_karti2);
+          let pc_karti3 = Math.floor(Math.random() * kartebi.length);
+          document.images[2].src = "deck/" + kartebi[pc_karti3];
+          scorePC = scorePC + qula(pc_karti3);
+          document.getElementById("PC").innerHTML =
+            qula(pc_karti1) +
+            "+" +
+            qula(pc_karti2) +
+            "+" +
+            qula(pc_karti3) +
+            " = " +
+            scorePC;
+
+          let str_ME = "";
+          function kartiME(J) {
+            me_karti = Math.floor(Math.random() * kartebi.length);
+            document.images[J].src = "deck/" + kartebi[me_karti];
+            scoreME = scoreME + qula(me_karti);
+            if (J < 5) {
+              str_ME = str_ME + qula(me_karti) + " + ";
+            } else {
+              str_ME = str_ME + qula(me_karti) + " = " + scoreME;
+              if (scoreME > scorePC) {
+                document.getElementById("result_finish").innerHTML =
+                  "you won!!!";
+              } else {
+                document.getElementById("result_finish").innerHTML = "you lose";
+              }
+            }
+            document.getElementById("ME").innerHTML = str_ME;
+          }
+
+          function qula(I) {
+            if (kartebi[I].substring(0, 1) == "6") Q = 6;
+            if (kartebi[I].substring(0, 1) == "7") Q = 7;
+            if (kartebi[I].substring(0, 1) == "8") Q = 8;
+            if (kartebi[I].substring(0, 1) == "9") Q = 9;
+            if (kartebi[I].substring(0, 1) == "1") Q = 10;
+            if (kartebi[I].substring(0, 1) == "v") Q = 2;
+            if (kartebi[I].substring(0, 1) == "d") Q = 3;
+            if (kartebi[I].substring(0, 1) == "k") Q = 4;
+            if (kartebi[I].substring(0, 1) == "t") Q = 11;
+            return Q;
+          }
+        </script>
+      </article>
+    </section>
+
+    <footer>2022 &copy;ყველა უფლება დაცულია</footer>
+  </body>
+</html>
